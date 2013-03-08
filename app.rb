@@ -66,7 +66,7 @@ post '/webhooks/' + settings.webhook_path do
     :party_id => @donor.id,
     :visible_to => settings.highrise_group_name,
     :group_id => settings.highrise_group_id,
-    :price => charge.amount,
+    :price => charge.amount/100,
     :currency => "USD",
     :price_type => "fixed",
   )
