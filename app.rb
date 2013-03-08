@@ -1,26 +1,16 @@
 require 'sinatra'
 require 'highrise'
 require 'stripe'
-require 'mail'
 require 'json'
 
 #Set secret keys from environment variables
 set :highrise_api_token, ENV['HIGHRISE_API_TOKEN']
 set :webhook_path, ENV['WEBHOOK_PATH']
 set :stripe_secret_key, ENV['STRIPE_SECRET_KEY']
-set :highrise_group_id, 463829
+set :highrise_group_id, 464304
 set :highrise_donations_category_id, 2730561
 
 set :protection, except: :ip_spoofing
-
-Mail.defaults do
-  delivery_method :smtp, {
-    :port      => 587,
-    :address   => "smtp.mandrillapp.com",
-    :user_name => ENV["MANDRILL_USERNAME"],
-    :password  => ENV["MANDRILL_PASSWORD"]
-  }
-end
 
 Stripe.api_key = settings.stripe_secret_key
 Highrise::Base.site = 'https://ddem.highrisehq.com'
@@ -82,20 +72,5 @@ post '/webhooks/' + settings.webhook_path do
   
   # Deals are initially created as "Pending", since the charge/donation is already made, this is now "Won"
   @donation.update_status("won")
-  
-  mail = Mail.new do
-    to      customer.email
-    from    'Digital Democracy <info@digital-democracy.org>' # Your from name and email address
-    subject 'Thank you for your donation!'
-    
-    html_part do
-      content_type 'text/html; charset=UTF-8'
-      body "<p>Dear Donor,</p><p>Thank you so much for your kind donation of <strong>$#{charge.amount/100}</strong>. It means a lot to us.</p><p>Yours,</p><p>The Digital Democracy Team</p>"
-    end
-  end
-  mail['X-MC-Template'] = 'test-mandrill-template|std_content00'
-  mail['X-MC-Tags'] = 'test-email'
-  mail['X-MC-InlineCSS'] = 'true'
-  mail.deliver
   
 end
