@@ -27,7 +27,7 @@ post '/webhooks/' + settings.webhook_path do
   event = Stripe::Event.retrieve(event_json['id'])
   
   # Only respond to "charge.succeeded" events
-  pass unless event.type == "charge.succeeded"
+  halt 200 unless event.type == "charge.succeeded"
   
   # The charge object https://stripe.com/docs/api?lang=ruby#charges
   charge = event.data.object
