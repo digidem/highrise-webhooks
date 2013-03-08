@@ -16,10 +16,6 @@ Highrise::Base.site = 'https://ddem.highrisehq.com'
 Highrise::Base.user = settings.highrise_api_token
 Highrise::Base.format = :xml
 
-get '/' do
-  "hello world"
-end
-
 # Use an unguessable string for webhook_path for (some) added security.
 post '/webhooks/' + settings.webhook_path do
   
