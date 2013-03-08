@@ -16,11 +16,6 @@ Highrise::Base.site = 'https://ddem.highrisehq.com'
 Highrise::Base.user = settings.highrise_api_token
 Highrise::Base.format = :xml
 
-# Only respond to https requests
-before do
-  halt unless request.secure?
-end
-
 get '/' do
   "hello world"
 end
