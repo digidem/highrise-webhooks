@@ -63,7 +63,7 @@ post '/webhooks/' + settings.webhook_path do
   # https://github.com/37signals/highrise-api/blob/master/sections/deals.md
   @donation = Highrise::Deal.new(
     :name => charge.description,
-    :party_id => @person.id,
+    :party_id => @donor.id,
     :visible_to => settings.highrise_group_name,
     :group_id => settings.highrise_group_id,
     :price => charge.amount,
