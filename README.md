@@ -1,6 +1,6 @@
-# Stripe Webhooks Controller
+# Highrise Webhooks Controller
 
-This Sinatra application will respond to a "charge.succeeded" event from a [Stripe webhook](https://stripe.com/docs/webhooks)
+This Sinatra application will respond to a "charge.succeeded" event from a [Stripe webhook](https://stripe.com/docs/webhooks) by updating Deals and People in Highrise
 
 Currently when receiving a POST from Stripe the app will:
 
