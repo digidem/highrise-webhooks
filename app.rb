@@ -7,6 +7,7 @@ set :highrise_api_token, ENV['HIGHRISE_API_TOKEN']
 set :webhook_path, ENV['WEBHOOK_PATH']
 set :stripe_secret_key, ENV['STRIPE_SECRET_KEY']
 set :highrise_group_id, 463829
+set :highrise_donations_category_id, 2730561
 
 set :protection, except: :ip_spoofing
 
@@ -64,6 +65,7 @@ post '/webhooks/' + settings.webhook_path do
     :price => charge.amount/100,
     :currency => "USD",
     :price_type => "fixed",
+    :category_id => settings.highrise_donations_category_id
   )
   @donation.save
   
