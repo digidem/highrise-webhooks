@@ -6,7 +6,6 @@ require 'stripe'
 set :highrise_api_token, ENV['HIGHRISE_API_TOKEN']
 set :webhook_path, ENV['WEBHOOK_PATH']
 set :stripe_secret_key, ENV['STRIPE_SECRET_KEY']
-set :highrise_group_name, "Development"
 set :highrise_group_id, 463829
 
 set :protection, except: :ip_spoofing
@@ -60,7 +59,7 @@ post '/webhooks/' + settings.webhook_path do
   @donation = Highrise::Deal.new(
     :name => charge.description,
     :party_id => @donor.id,
-    :visible_to => settings.highrise_group_name,
+    :visible_to => "NamedGroup",
     :group_id => settings.highrise_group_id,
     :price => charge.amount/100,
     :currency => "USD",
