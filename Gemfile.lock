@@ -1,3 +1,11 @@
+GIT
+  remote: git@github.com:digidem/webhook-gem.git
+  revision: 1a1ac6eb811dedc95de827600e6c6cbe81d53131
+  specs:
+    webhook (0.0.3)
+      json
+      stripe (~> 1.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -63,6 +71,6 @@ DEPENDENCIES
   json
   shotgun
   sinatra
-  stripe
   thin
   tux
+  webhook (>= 0.0.3)!
