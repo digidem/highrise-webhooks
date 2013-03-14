@@ -18,7 +18,7 @@ Highrise::Base.user = settings.highrise_api_token
 Highrise::Base.format = :xml
 
 # Use an unguessable string for webhook_path for (some) added security.
-post '/webhooks/' + settings.webhook_path do
+post '/webhooks/stripe/' + settings.webhook_path do
   @event = Webhook::Stripe.new(request.body.read)
   case @event.type
   when "charge.succeeded"
