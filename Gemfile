@@ -3,7 +3,7 @@ source "https://rubygems.org"
 gem "sinatra"
 gem "thin"
 gem "highrise"
-gem "stripe"
+gem "webhook", :git => 'git@github.com:digidem/webhook-gem.git'
 gem "json"
 
 group :development do
