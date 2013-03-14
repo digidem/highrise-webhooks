@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:digidem/webhook-gem.git
+  remote: https://github.com/digidem/webhook-gem.git
   revision: 1a1ac6eb811dedc95de827600e6c6cbe81d53131
   specs:
     webhook (0.0.3)
