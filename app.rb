@@ -12,7 +12,7 @@ set :highrise_donations_category_id, 2730561
 
 set :protection, except: :ip_spoofing
 
-Webhook::Stripe.api_key = settings.stripe_secret_key
+Stripe.api_key = settings.stripe_secret_key
 Highrise::Base.site = 'https://ddem.highrisehq.com'
 Highrise::Base.user = settings.highrise_api_token
 Highrise::Base.format = :xml
