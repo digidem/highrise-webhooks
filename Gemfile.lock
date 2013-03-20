@@ -1,9 +1,10 @@
 GIT
   remote: https://github.com/digidem/webhook-gem.git
-  revision: 1a1ac6eb811dedc95de827600e6c6cbe81d53131
+  revision: d380df81307525f5b1158b07492b524b345b5372
   specs:
-    webhook (0.0.3)
+    webhook (0.2.0)
       json
+      rack
       stripe (~> 1.7)
 
 GEM
@@ -73,4 +74,4 @@ DEPENDENCIES
   sinatra
   thin
   tux
-  webhook (>= 0.0.3)!
+  webhook (>= 0.2.0)!

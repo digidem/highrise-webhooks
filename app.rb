@@ -42,6 +42,38 @@ post '/webhooks/stripe/' + settings.webhook_path do
   
     # Deals are initially created as "Pending", since the charge/donation is already made, this is now "Won"
     @donation.update_status("won")
+    content_type :json
+    @donation.to_json
+  end
+end
+
+post '/webhooks/paypal/' + settings.webhook_path do
+  @event = Webhook::Paypal.new(request.body.read)
+  
+  if @event.validated?
+    if @event.completed?
+      # Lookup contact in Highrise or create a new contact
+      @donor = Highrise::Person.find_or_create(:email => @event.email, :name => @event.name)
+  
+      # Create a new Deal in Highrise for the donation, attached to the donor.
+      # https://github.com/37signals/highrise-api/blob/master/sections/deals.md
+      @donation = Highrise::Deal.new(
+        :name => @event.description,
+        :party_id => @donor.id,
+        :visible_to => "NamedGroup",
+        :group_id => settings.highrise_group_id,
+        :price => @event.amount/100,
+        :currency => "USD",
+        :price_type => "fixed",
+        :category_id => settings.highrise_donations_category_id
+      )
+      @donation.save
+  
+      # Deals are initially created as "Pending", since the charge/donation is already made, this is now "Won"
+      @donation.update_status("won")
+      content_type :json
+      @donation.to_json
+    end
   end
 end
 
