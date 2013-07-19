@@ -58,7 +58,7 @@ post '/webhooks/paypal/' + settings.webhook_path do
       # Create a new Deal in Highrise for the donation, attached to the donor.
       # https://github.com/37signals/highrise-api/blob/master/sections/deals.md
       @donation = Highrise::Deal.new(
-        :name => @event.description,
+        :name => "$#{ @event.amount/100 } Paypal Donation",
         :party_id => @donor.id,
         :visible_to => "NamedGroup",
         :group_id => 463829,
