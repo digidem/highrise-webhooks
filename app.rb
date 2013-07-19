@@ -61,7 +61,7 @@ post '/webhooks/paypal/' + settings.webhook_path do
         :name => @event.description,
         :party_id => @donor.id,
         :visible_to => "NamedGroup",
-        :group_id => settings.highrise_group_id,
+        :group_id => 463829,
         :price => @event.amount/100,
         :currency => "USD",
         :price_type => "fixed",
